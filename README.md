@@ -6,42 +6,43 @@ This is a simple blog application built using **Next.js 15**, implementing key f
 
 - [Next.js 15](https://nextjs.org/)
 - React
-- TypeScript (optional depending on your setup)
+- TypeScript (optional, depending on your setup)
 - Tailwind CSS
 - NextAuth (for authentication)
 - Markdown / MDX (for blog posts)
-- Prisma + PostgreSQL (if DB is used)
+- Prisma + PostgreSQL (if a database is used)
 
 ## Features
 
 - User authentication with NextAuth
 - Create, edit, and delete blog posts
 - Server Actions & Dynamic Routing
-- SEO optimized pages
+- SEO-optimized pages
 - Tailwind CSS styling
-- Static Site Generation (SSG) and SSR
+- Static Site Generation (SSG) and Server-Side Rendering (SSR)
 
 ## Getting Started
 
-Clone the repository and install dependencies:
+1. Clone the repository and install dependencies:
+   ```bash
+   git clone https://github.com/Anaanti/NextJs-Project.git
+   cd NextJs-Project
+   npm install
+   ```
 
-```bash
-git clone https://github.com/Anaanti/NextJs-Project.git
-cd NextJs-Project
-npm install
-Create a .env.local file and add the required environment variables as per the setup (e.g., for database and authentication).
+2. Create a `.env.local` file in the project root and add the required environment variables (e.g., for database and authentication):
+   ```plaintext
+   DATABASE_URL=your_database_url
+   NEXTAUTH_SECRET=your_auth_secret
+   ```
 
-Then run the development server:
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-bash
-Copy
-Edit
-npm run dev
-Open http://localhost:3000 to view it in the browser.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
 
-Preview
-Screenshot or demo gif here if you'd like
+## Status
 
-Status
-In Progress 
-
+**In Progress**
