@@ -2,23 +2,22 @@
 
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { prisma } from "./utils/db";
-import { redirect } from "next/navigation"; // Add this import
+import { redirect } from "next/navigation"; 
 
 export async function handleSubmission(formData: FormData) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
-  
-  // Check if user exists
+
   if (!user) {
-    // Handle the case when user is not authenticated
-    return redirect("/auth/login"); // Redirect to login page or handle accordingly
+    
+    return redirect("api/auth/register"); 
   }
 
   const title = formData.get('title');
   const content = formData.get('content');
   const url = formData.get('url');
   
-  const data = await prisma.blogPost.create({
+  await prisma.blogPost.create({
     data: {
       title: title as string,
       content: content as string,
