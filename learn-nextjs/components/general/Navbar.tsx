@@ -13,8 +13,8 @@ export async function Navbar(){
     <nav className="py-5 flex items-center justify-between">
       <div className="flex items-center gap-6">
         <Link href="/">
-        <h1 className="text-3xl font-semibold">Blog 
-          <span className="text-blue-500">XYZ</span>
+        <h1 className="text-3xl font-semibold">The Quill 
+          <span className="text-blue-500">&Parchment</span>
         </h1>
         </Link>
         <div className="hidden sm:flex items-center gap-6">
