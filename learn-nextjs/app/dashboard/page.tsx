@@ -25,7 +25,7 @@ export default async function DashboardPage() {
     return <div>Please sign in to view your dashboard</div>;
   }
 
-  const data = await getData(user.id);
+  const data = await getData(user?.id);
 
   return (
 
