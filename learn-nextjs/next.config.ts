@@ -1,8 +1,8 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  images:{
-    remotePatterns: [
+const nextConfig = {
+  async headers() {
+    return [
       {
         hostname: "resizing.flixster.com",
         protocol: "https",
