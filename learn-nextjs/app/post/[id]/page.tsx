@@ -1,6 +1,5 @@
 import { prisma } from "@/app/utils/db";
 import { buttonVariants } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Image from "next/image";
