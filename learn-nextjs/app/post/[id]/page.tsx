@@ -4,12 +4,11 @@ import { prisma } from "@/app/utils/db";
 import { notFound } from "next/navigation";
 import { DeleteButton } from "@/components/general/DeleteButton";
 
-type Props = {
-  params: { id: string };
-  searchParams: Record<string, string | string[] | undefined>;
+type PageProps = {
+  params: { id: string }
 }
 
-export default async function PostPage({ params }: Props) {
+export default async function PostPage({ params }: PageProps) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
   
@@ -64,18 +63,3 @@ export default async function PostPage({ params }: Props) {
     </div>
   );
 }
-
-// Add metadata generation
-export async function generateMetadata({ params }: Props) {
-  const post = await prisma.blogPost.findUnique({
-    where: { id: params.id }
-  });
-
-  return {
-    title: post?.title ?? 'Blog Post',
-    description: post?.content.slice(0, 160) ?? 'Blog post content'
-  };
-}
-
-// Mark the page as dynamic to ensure it works with your database
-export const dynamic = 'force-dynamic';
