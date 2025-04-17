@@ -4,11 +4,14 @@ import { prisma } from "@/app/utils/db";
 import { notFound } from "next/navigation";
 import { DeleteButton } from "@/components/general/DeleteButton";
 
-export default async function PostPage({ 
-  params 
-}: { 
-  params: { id: string } 
-}) {
+type Props = {
+  params: {
+    id: string;
+  };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export default async function PostPage({ params }: Props) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
   
