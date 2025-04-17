@@ -34,7 +34,7 @@ export default async function DashboardPage() {
         <h2 className="text-xl font-medium">Your Blog Articles</h2>
 
         <Link className={buttonVariants()}
-        href="/dashboard/create">
+        href="/create">
         Create Post 
         </Link>
      </div>

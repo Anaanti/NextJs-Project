@@ -1,64 +1,39 @@
-import Link from "next/link";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import Image from "next/image";
+import { prisma } from "@/app/utils/db";
+import { notFound } from "next/navigation";
+import { DeleteButton } from "@/components/general/DeleteButton";
 
-interface IappProps {
-  data: {
-    id: string;
-    title: string;
-    content: string;
-    imageUrl: string;
-    authorId: string;
-    authorName: string;
-    authorImage: string;
-    createdAt: Date;
-    updatedAt: Date;
+export default async function PostPage({ params }: { params: { id: string } }) {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+  
+  const post = await prisma.blogPost.findUnique({
+    where: { id: params.id }
+  });
+
+  if (!post) {
+    notFound();
   }
-}
 
-export function BlogPostCard({ data }: IappProps) {
   return (
-    <div className="group relative overflow-hidden rounded-lg border-gray-200 bg-white shadow-md transition-all hover:shadow-lg">
-      <Link href={`/post/${data.id}`} className="block w-full h-full">
-        <div className="relative h-48 w-full overflow-hidden">
-          <Image src={data.imageUrl} alt="Image for blog" fill
-            className="object-contain transition-transform duration-300 group-hover:scale-105"
-          />
+    <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="space-y-8">
+        {/* Title and Delete Button */}
+        <div className="flex items-center justify-between">
+          <h1 className="text-4xl font-bold">{post.title}</h1>
+          {user && user.id === post.authorId && (
+            <DeleteButton 
+              postId={post.id} 
+              authorId={post.authorId} 
+              currentUserId={user.id} 
+            />
+          )}
         </div>
 
-        <div className="p-4"> {/* Existing padding for the title */}
-          <h3 className="mb-2 text-lg font-semibold text-gray-900">{data.title}</h3>
-        </div>
-
-        <div className="px-4 pb-4"> {/* Add padding-x and padding-bottom here */}
-          <p className="mb-4 text-sm text-gray-600 line-clamp-3">
-            {data.content}
-          </p>
-
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <div className="relative size-8 overflow-hidden rounded-full">
-                <Image
-                  src={data.authorImage} alt={data.authorName}
-                  fill
-                  className="object-cover" />
-              </div>
-
-              <p className="text-sm font-medium text-gray-700">{data.authorName}</p>
-            
-            </div>
-
-            <time className="text-xs text-gray-500">
-              {new Intl.DateTimeFormat('en-In',{
-                year : 'numeric',
-                month : 'short' ,
-                day : "numeric"
-              }).format(data.createdAt)}
-            </time>
-
-          </div>
-
-        </div>
-      </Link>
+        {/* Rest of your post content */}
+        {/* ... */}
+      </div>
     </div>
-  )
+  );
 }
