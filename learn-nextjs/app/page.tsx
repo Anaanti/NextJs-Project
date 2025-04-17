@@ -1,4 +1,4 @@
-import { BlogPostCard } from "@/components/general/BlogpostCard";
+import BlogPostCard from "@/components/general/BlogpostCard";
 import { BlogPostsGrid } from "@/components/general/BlogPostsGrid";
 import { prisma } from "./utils/db";
 import { Suspense } from "react";

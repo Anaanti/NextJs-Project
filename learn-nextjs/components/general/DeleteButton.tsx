@@ -6,15 +6,16 @@ import { useState } from "react";
 
 interface DeleteButtonProps {
   postId: string;
-  authorId: string;
-  currentUserId: string;
 }
 
-export function DeleteButton({ postId, authorId, currentUserId }: DeleteButtonProps) {
+export function DeleteButton({ postId }: DeleteButtonProps) {
   const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
 
-  const handleDelete = async () => {
+  const handleDelete = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
     if (!confirm("Are you sure you want to delete this post?")) {
       return;
     }
@@ -22,7 +23,7 @@ export function DeleteButton({ postId, authorId, currentUserId }: DeleteButtonPr
     try {
       setIsDeleting(true);
       await deletePost(postId);
-      router.push('/dashboard'); // Redirect to dashboard after deletion
+      router.refresh();
     } catch (error) {
       console.error("Error deleting post:", error);
       alert("Failed to delete post");
@@ -35,9 +36,9 @@ export function DeleteButton({ postId, authorId, currentUserId }: DeleteButtonPr
     <button
       onClick={handleDelete}
       disabled={isDeleting}
-      className="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600 disabled:opacity-50 transition-colors"
+      className="text-red-500 hover:text-red-700 font-medium text-sm transition-colors disabled:opacity-50 px-3 py-1 rounded-md hover:bg-red-50"
     >
-      {isDeleting ? "Deleting..." : "Delete Post"}
+      {isDeleting ? "Deleting..." : "Delete"}
     </button>
   );
 }

@@ -2,7 +2,8 @@
 
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { prisma } from "./utils/db";
-import { redirect } from "next/navigation"; 
+import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 export async function handleSubmission(formData: FormData) {
   try {
@@ -61,6 +62,7 @@ export async function deletePost(postId: string) {
       where: { id: postId },
     });
 
+    revalidatePath('/dashboard');
     return { success: true };
   } catch (error) {
     console.error("Error deleting post:", error);
