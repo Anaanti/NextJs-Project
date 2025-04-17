@@ -36,7 +36,7 @@ export default async function PostPage({
               src={post.imageUrl}
               alt={post.title}
               fill
-              className="object-cover"
+              className="object-contain"
             />
           </div>
 
