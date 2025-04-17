@@ -3,8 +3,13 @@ import Image from "next/image";
 import { prisma } from "@/app/utils/db";
 import { notFound } from "next/navigation";
 import { DeleteButton } from "@/components/general/DeleteButton";
+import { PageParams } from '@/app/types/page';
 
-export default async function PostPage({ params }: { params: { id: string } }) {
+interface PostPageParams {
+  id: string;
+}
+
+export default async function PostPage({ params }: PageParams) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
   
