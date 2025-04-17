@@ -23,6 +23,11 @@ const nextConfig: NextConfig = {
         protocol: "https",
         port:"",
       },
+      {
+        hostname: "images5.alphacoders.com",
+        protocol: "https",
+        port:"",
+      },
     ]
   }
 };
